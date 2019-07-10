@@ -7,16 +7,17 @@ const bodyParser = require('body-parser');
 const app = express();
 
 if(process.env.JAWSDB_URL){
-    var connection = mysql.createConnection(process.env.JAWSDB_URL)}
+    var myConnection = mysql.createConnection(process.env.JAWSDB_URL)}
 
 else{
-    var connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'datoslitt'
+    var myConnection = mysql.createConnection({
+        host: 'q68u8b2buodpme2n.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        user: 'uclhkblhddwjd05v',
+        password: 'e7pvlfsyjjpmvyh0',
+        port: '3306',
+        database: 'bpfonu5c6cf76l3t',
+        multipleStatements: true
     });
-}
 
 const port = process.env.PORT || 4000;
 app.use(bodyParser.json());
@@ -25,14 +26,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // mysql
 
-var myConnection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    port: '3306',
-    database: 'datoslitt',
-    multipleStatements: true
-});
+
 
 app.get('/api/primax', (req, res) => {
     myConnection.query('SELECT c.nombre as Cliente, COUNT(*) as Total\
