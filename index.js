@@ -5,6 +5,20 @@ const bodyParser = require('body-parser');
 //const port = process.env.PORT || 5000;
 
 const app = express();
+
+if(process.env.JAWSDB_URL){
+    var connection = mysql.createConnection(process.env.JAWSDB_URL)}
+
+else{
+    var connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'datoslitt'
+    });
+}
+
+const port = process.env.PORT || 4000;
 app.use(bodyParser.json());
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -517,7 +531,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + '/client/src/pages/Card'));
 });
 
-const port = process.env.PORT || 4000;
+
 app.listen(port);
 
 console.log('App is listening on port ' + port);
